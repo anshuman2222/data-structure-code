@@ -1,1 +1,63 @@
 
+#include <iostream>
+
+using namespace std;
+
+typedef struct node {
+    int data;
+    struct node *next;
+}node;
+
+void create_linked_list(int data, node **head) {
+    node *tmp = (node *)malloc(sizeof(node));
+    if(tmp == NULL) {
+        cout<<"memory allocation is failed";
+        return;
+    }
+    tmp -> next = NULL;
+    tmp -> data = data;
+    
+    if(*head == NULL) {
+        *head = tmp;
+        return;
+    }
+    node *curr = *head;
+    while(curr -> next) {
+        curr = curr -> next;
+    }
+    curr -> next = tmp;
+}
+
+void print_linked_list(node *head) {
+    while(head) {
+        cout<<head -> data<<" ";
+        head = head -> next;
+    }
+}
+
+int main()
+{
+    node *head1 = NULL;
+    node *head2 = NULL;
+    int n1, n2, data;
+    
+    cout<<"Enter n1: ";
+    cin>>n1;
+    
+    for(int i = 0; i < n1; i++) {
+        cin>>data;
+        create_linked_list(data, &head1);
+    }
+    
+    cout<<"Enter n2: ";
+    cin>>n2;
+    
+    for(int i = 0; i < n2; i++) {
+        cin>>data;
+        create_linked_list(data, &head2);
+    }
+    print_linked_list(head1);
+    cout<<"\n";
+    print_linked_list(head2);
+    return 0;
+}
